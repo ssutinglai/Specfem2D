@@ -60,6 +60,8 @@
       iglob = ibool(i,j,ispec)
       hlagrange = xir_store_loc(irecloc,i)*gammar_store_loc(irecloc,j)
 
+
+
       ! displacement/velocity/acceleration/pressure value (depending on seismotype)
       select case (seismotype)
 
@@ -70,6 +72,7 @@
         ! computes interpolated field
         vx = vx + dxd*hlagrange
         vz = vz + dzd*hlagrange
+
 
       case (4,6)
         ! pressure/potential

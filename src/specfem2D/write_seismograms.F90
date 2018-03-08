@@ -131,6 +131,13 @@
               sisux(seismo_current,irecloc) = valux
               sisuz(seismo_current,irecloc) = ZERO
             endif
+!open(13,file='waveletSpe',form='formatted',status='unknown',position='append')
+!!do isample = 1,NSTEP/subsamp_seismos
+!
+!! forward time
+!!time_t = dble(isample - 1) * deltat - t0
+!write(13,*) seismo_current,irecloc,'=',cosrot_irec(irecloc),'*',valux ,'+', sinrot_irec(irecloc),'*',valuz !isample,t0,time_t,' ',buffer_binary(isample,irec,iorientation)
+!close(13)
             ! additional curl case
             if (seismotype == 5) siscurl(seismo_current,irecloc) = valcurl
           endif
@@ -408,8 +415,17 @@
 
               write(11,*) time_t,' ',buffer_binary(isample,irec,iorientation)
             enddo
-            
             close(11)
+
+!open(13,file='waveletSpe',form='formatted',status='unknown',position='append')
+!do isample = 1,NSTEP/subsamp_seismos
+!
+!! forward time
+!time_t = dble(isample - 1) * deltat - t0
+!write(13,*) !seismo_current,irecloc,'=',cosrot_irec(irecloc),'*',valux ,'+', sinrot_irec(irecloc),'*',valuz !isample,t0,time_t,' ',buffer_binary(isample,irec,iorientation)
+!enddo
+!close(13)
+
           enddo ! iorientation
 
         endif ! save_ASCII_seismograms

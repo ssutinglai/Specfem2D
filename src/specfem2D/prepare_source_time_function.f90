@@ -172,6 +172,7 @@
           call exit_MPI(myrank,'Error invalid time stepping scheme chosen, please check...')
         end select
 
+
         t_used = timeval - t0 - tshift_src(i_source)
 
         ! only process/partition containing source must set STF
@@ -196,6 +197,11 @@
               ! Ricker (second derivative of a Gaussian) source time function
               source_time_function(i_source,it,i_stage) = - factor(i_source) * &
                       comp_source_time_function_rickr(t_used,f0_source(i_source))
+open(13,file='waveletSpe',form='formatted',status='unknown',position='append')
+write(13,*)it, source_time_function(i_source,it,i_stage)
+close(13)
+
+
             endif
 
           case (2)
